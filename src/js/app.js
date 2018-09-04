@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { render } from 'react-dom';
 import './../css/style.css';
+import ServiceComponent from './services/serviceComponent';
 
 if (process.env.NODE_ENV !== 'production') {
     console.log('Looks like we are in development mode!');
@@ -22,25 +23,23 @@ const App = () => (
                 </li>
             </ul>
 
-            <Route path="/:id" component={Service} />
+            <Route exact path="/" component={Home} />
+            <Route path="/products" component={Products} />
+            <Route path="/services" component={ServiceComponent} />
         </div>
     </Router>
 );
 
 const Home = () => (
-    <h1>Home component</h1>
+    <h1>Home component 33</h1>
 );
 
 const Products = () => (
-    <h1>Products component</h1>
-);
-
-const Services = () => (
-    <h1>Services component</h1>
+    <h1>Products component 33</h1>
 );
 
 const Product = () => (
-    <h1>Product component</h1>
+    <h1>Product component 33</h1>
 );  
 
 const Service = ({ match }) => (
