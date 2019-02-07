@@ -1,34 +1,26 @@
 {
-  "name": "set-your-price",
-  "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "clean-webpack-plugin": "^0.1.19",
-    "css-loader": "^1.0.0",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.4.1",
-    "node-sass": "^4.9.3",
-    "optimize-css-assets-webpack-plugin": "^5.0.0",
-    "postcss-loader": "^3.0.0",
-    "sass-loader": "^7.1.0",
-    "uglifyjs-webpack-plugin": "^1.3.0",
-    "webpack": "^4.16.4",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5",
-    "webpack-merge": "^4.1.4"
+  "name": "set-price",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.3"
   },
   "scripts": {
-    "start": "webpack-dev-server --open --config webpack.dev.js --port=3003 --colors",
-    "build": "webpack --config webpack.prod.js --progress --colors"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "dependencies": {
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-router-dom": "^4.3.1"
-  }
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
