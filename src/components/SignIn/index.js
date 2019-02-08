@@ -1,9 +1,18 @@
 import React, { Component } from "react";
+import { compose } from "recompose";
+import { withRouter } from "react-router-dom";
 
 import ROUTES from "constants/routes";
 import { withFirebase } from "components/Firebase";
+import { PasswordForgetLink } from "components/PasswordForget";
 
-class SignInForm extends Component {
+const SignIn = () => (
+  <React.Fragment>
+    <SignInForm />
+    <PasswordForgetLink />
+  </React.Fragment>
+);
+class SignInFormBase extends Component {
   initialState = { email: "", password: "", error: null };
 
   state = this.initialState;
@@ -29,31 +38,33 @@ class SignInForm extends Component {
     const isInvalid = email === "" || password === "";
 
     return (
-      <React.Fragment>
-        <h1>Sign in - set price app</h1>
-        <form onSubmit={this.onSubmit}>
-          <input
-            name="email"
-            value={email}
-            placeholder="Email address"
-            type="text"
-            onChange={this.onChange}
-          />
-          <input
-            name="password"
-            value={password}
-            placeholder="Password"
-            type="password"
-            onChange={this.onChange}
-          />
-          <button type="submit" disable={isInvalid}>
-            Sign In
-          </button>
-          {error && <p>{error.message}</p>}
-        </form>
-      </React.Fragment>
+      <form onSubmit={this.onSubmit}>
+        <input
+          name="email"
+          value={email}
+          placeholder="Email address"
+          type="text"
+          onChange={this.onChange}
+        />
+        <input
+          name="password"
+          value={password}
+          placeholder="Password"
+          type="password"
+          onChange={this.onChange}
+        />
+        <button type="submit" disabled={isInvalid}>
+          Sign In
+        </button>
+        {error && <p>{error.message}</p>}
+      </form>
     );
   }
 }
 
-export default withFirebase(SignInForm);
+const SignInForm = compose(
+  withFirebase,
+  withRouter
+)(SignInFormBase);
+
+export default SignIn;

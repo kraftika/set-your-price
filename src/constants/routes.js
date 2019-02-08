@@ -7,7 +7,8 @@ const ROUTES = {
   PRODUCTS: "/products",
   PRODUCT: "/product/:id",
   SERVICES: "/services",
-  SERVICE: "/service/:id"
+  SERVICE: "/service/:id",
+  PASSWORD_FORGET: "/password-forget"
 };
 
 export default ROUTES;

@@ -25,6 +25,8 @@ class Firebase {
   signInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
 
+  resetPassword = email => this.auth.sendPasswordResetEmail(email);
+
   user = uid => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref(`users`);
