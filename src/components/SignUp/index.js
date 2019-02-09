@@ -20,14 +20,8 @@ class SignUpForm extends Component {
   onSubmit = async event => {
     const { username, email, password } = this.state;
 
-    const promise = await this.props.firebase.createUserWithEmailAndPassword(
-      email,
-      password
-    );
-
-    console.log("promise", promise);
-
-    promise
+    this.props.firebase
+      .createUserWithEmailAndPassword(email, password)
       .then(authUser =>
         this.props.firebase.user(authUser.user.uid).set({ username, email })
       )

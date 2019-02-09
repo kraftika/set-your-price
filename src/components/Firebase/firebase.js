@@ -19,8 +19,8 @@ class Firebase {
     this.db = app.database();
   }
 
-  createUserWithEmailAndPassword = async (email, password) =>
-    await this.auth.createUserWithEmailAndPassword(email, password);
+  createUserWithEmailAndPassword = (email, password) =>
+    this.auth.createUserWithEmailAndPassword(email, password);
 
   signInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
@@ -28,6 +28,8 @@ class Firebase {
   resetPassword = email => this.auth.sendPasswordResetEmail(email);
 
   passwordUpdate = password => this.auth.currentUser.updatePassword(password);
+
+  signOut = () => this.auth.signOut();
 
   user = uid => this.db.ref(`users/${uid}`);
 
