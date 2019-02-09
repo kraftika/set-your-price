@@ -19,13 +19,15 @@ class Firebase {
     this.db = app.database();
   }
 
-  createUserWithEmailAndPassword = (email, password) =>
-    this.auth.createUserWithEmailAndPassword(email, password);
+  createUserWithEmailAndPassword = async (email, password) =>
+    await this.auth.createUserWithEmailAndPassword(email, password);
 
   signInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
 
   resetPassword = email => this.auth.sendPasswordResetEmail(email);
+
+  passwordUpdate = password => this.auth.currentUser.updatePassword(password);
 
   user = uid => this.db.ref(`users/${uid}`);
 

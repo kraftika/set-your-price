@@ -17,13 +17,15 @@ class SignUpForm extends Component {
 
   onChange = ({ target: { name, value } }) => this.setState({ [name]: value });
 
-  onSubmit = event => {
+  onSubmit = async event => {
     const { username, email, password } = this.state;
 
-    const promise = this.props.firebase.createUserWithEmailAndPassword(
+    const promise = await this.props.firebase.createUserWithEmailAndPassword(
       email,
       password
     );
+
+    console.log("promise", promise);
 
     promise
       .then(authUser =>

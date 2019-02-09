@@ -11,6 +11,7 @@ import Landing from "components/Landing";
 import ServicesList, { Service } from "components/Services";
 import ProductsList, { Product } from "components/Products";
 import PasswordForget from "components/PasswordForget";
+import Account from "components/Account";
 
 const App = () => (
   <React.Fragment>
@@ -19,6 +20,7 @@ const App = () => (
         <Navigation />
         <Route exact path={ROUTES.HOME} component={Home} />
         <Route exact path={ROUTES.ADMIN} component={Admin} />
+        <Route exact path={ROUTES.ACCOUNT} component={Account} />
         <Route exact path={ROUTES.LANDING} component={Landing} />
         <Route exact path={ROUTES.SIGN_IN} component={SignIn} />
         <Route exact path={ROUTES.SIGN_UP} component={SignUp} />
