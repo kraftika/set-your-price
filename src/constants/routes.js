@@ -5,7 +5,7 @@ const ROUTES = {
   SIGN_IN: "/signin",
   SIGN_UP: "/signup",
   PRODUCTS: "/products",
-  PRODUCT: "/product/:id",
+  PRODUCT: "/products/:id",
   SERVICES: "/services",
   SERVICE: "/service/:id",
   PASSWORD_FORGET: "/password-forget",
