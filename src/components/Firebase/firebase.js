@@ -25,6 +25,8 @@ class Firebase {
   signInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
 
+  currentUser = () => this.auth.currentUser;
+
   resetPassword = email => this.auth.sendPasswordResetEmail(email);
 
   passwordUpdate = password => this.auth.currentUser.updatePassword(password);
@@ -34,6 +36,10 @@ class Firebase {
   user = uid => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref(`users`);
+
+  roles = uid => this.db.ref(`roles/${uid}`);
+
+  products = uid => this.db.ref(`products/${uid}`);
 }
 
 export default Firebase;

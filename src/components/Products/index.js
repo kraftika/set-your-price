@@ -1,6 +1,7 @@
 import ProductsList from "./components/ProductsList";
-import Product from "./components/Product";
+import CreateProduct from "./components/CreateProduct";
+import EditProduct from "./components/EditProduct";
 
 export default ProductsList;
 
-export { Product };
+export { CreateProduct, EditProduct };
