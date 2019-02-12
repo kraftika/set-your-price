@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { withAuthorization } from "components/Session";
 
 class Products extends Component {
-  state = { products: [], loading: false };
+  state = { currentUser: null, products: [], loading: false };
   _isMounted = false;
 
   componentDidMount() {
@@ -24,7 +24,7 @@ class Products extends Component {
         }));
 
         if (this._isMounted) {
-          this.setState({ products, loading: false });
+          this.setState({ products, loading: false, currentUser });
         }
       });
     }
@@ -35,6 +35,11 @@ class Products extends Component {
     this._isMounted = false;
   }
 
+  deleteProduct = productId =>
+    this.props.firebase
+      .productRef(this.state.currentUser.uid, productId)
+      .remove();
+
   render() {
     const { products, loading } = this.state;
 
@@ -43,7 +48,10 @@ class Products extends Component {
         <h1>Products</h1>
         <Link to={`/products/create`}>Create</Link>
         {products.length ? (
-          <ProductItems products={products} onClick={this.onClick} />
+          <ProductItems
+            products={products}
+            onDeleteProduct={this.deleteProduct}
+          />
         ) : (
           <div>No product saved</div>
         )}
@@ -53,13 +61,14 @@ class Products extends Component {
   }
 }
 
-const ProductItems = ({ products }) => (
+const ProductItems = ({ products, onDeleteProduct }) => (
   <ul>
     {products.map(product => (
       <li key={product.uid}>
         <span>{product.name} </span>
         <span>{product.price}</span>
-        <Link to={`/products/${product.uid}`}>Edit</Link>
+        <Link to={`/products/${product.uid}/edit`}>Edit</Link>
+        <button onClick={() => onDeleteProduct(product.uid)}>Delete</button>
       </li>
     ))}
   </ul>

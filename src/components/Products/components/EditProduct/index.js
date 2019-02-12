@@ -5,8 +5,10 @@ import { withAuthorization } from "components/Session";
 
 class ProductForm extends Component {
   initialState = {
+    uid: "",
     name: "",
-    price: 0,
+    price: "",
+    currentUser: null,
     error: null
   };
 
@@ -15,14 +17,12 @@ class ProductForm extends Component {
   onChange = ({ target: { name, value } }) => this.setState({ [name]: value });
 
   onSubmit = event => {
-    const { name, price } = this.state;
-
-    const currentUser = this.props.firebase.currentUser();
+    const { uid: productUid, name, price, currentUser } = this.state;
 
     if (currentUser) {
       this.props.firebase
-        .products(currentUser.uid)
-        .push({ name, price })
+        .productRef(currentUser.uid, productUid)
+        .set({ name, price })
         .then(() => {
           this.setState({ ...this.initialState });
           this.props.history.push(ROUTES.PRODUCTS);
@@ -32,6 +32,31 @@ class ProductForm extends Component {
 
     event.preventDefault();
   };
+
+  componentDidMount() {
+    const {
+      match: {
+        params: { productId }
+      }
+    } = this.props;
+
+    const currentUser = this.props.firebase.currentUser();
+
+    this.setState({ uid: productId, currentUser });
+
+    if (currentUser) {
+      this.props.firebase
+        .productRef(currentUser.uid, productId)
+        .on("value", snapshot => {
+          const { name, price } = snapshot.val();
+          this.setState({ name, price });
+        });
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.firebase.productRef().off("value");
+  }
 
   render() {
     const { name, price, error } = this.state;
