@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import ROUTES from "constants/routes";
 import { withAuthorization } from "components/Session";
@@ -70,6 +71,12 @@ class ProductForm extends Component {
     );
   }
 }
+
+ProductForm.propTypes = {
+  firebase: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired
+};
 
 const condition = authenticatedUser => !!authenticatedUser;
 

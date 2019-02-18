@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import ROUTES from "constants/routes";
 import { withAuthorization } from "components/Session";
@@ -49,6 +50,7 @@ class ProductForm extends Component {
         .productRef(currentUser.uid, productId)
         .on("value", snapshot => {
           const { name, price } = snapshot.val();
+
           this.setState({ name, price });
         });
     }
@@ -93,6 +95,12 @@ class ProductForm extends Component {
     );
   }
 }
+
+ProductForm.propTypes = {
+  firebase: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired
+};
 
 const condition = authenticatedUser => !!authenticatedUser;
 

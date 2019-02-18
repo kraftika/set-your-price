@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { withFirebase } from "components/Firebase";
 import ROUTES from "constants/routes";
@@ -96,9 +97,14 @@ class SignUpForm extends Component {
   }
 }
 
+SignUpForm.propTypes = {
+  firebase: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+};
+
 const SignUpLink = () => (
   <p>
-    Don't you have an account? <Link to={ROUTES.SIGN_UP} />
+    ${`Don't you have an account?`} <Link to={ROUTES.SIGN_UP} />
   </p>
 );
 

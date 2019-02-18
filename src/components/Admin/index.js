@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import { withFirebase } from "components/Firebase";
 
@@ -39,6 +40,10 @@ class Admin extends Component {
   }
 }
 
+Admin.propTypes = {
+  firebase: PropTypes.object.isRequired
+};
+
 const UsersList = ({ users }) => (
   <ul>
     {users.map(user => (
@@ -59,4 +64,9 @@ const UsersList = ({ users }) => (
     ))}
   </ul>
 );
+
+UsersList.propTypes = {
+  users: PropTypes.array.isRequired
+};
+
 export default withFirebase(Admin);

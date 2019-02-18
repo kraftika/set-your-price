@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import ROUTES from "constants/routes";
 import { withFirebase } from "components/Firebase";
@@ -14,7 +15,7 @@ class PasswordForget extends Component {
   onSubmit = event => {
     const { email } = this.state;
 
-    this.props.withFirebase
+    this.props.firebase
       .resetPassword(email)
       .then(() => this.setState({ ...this.initialState }))
       .catch(error => this.setState({ error }));
@@ -47,6 +48,10 @@ class PasswordForget extends Component {
     );
   }
 }
+
+PasswordForget.propTypes = {
+  firebase: PropTypes.object.isRequired
+};
 
 const PasswordForgetLink = () => (
   <p>

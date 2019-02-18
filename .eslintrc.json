@@ -1,0 +1,49 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:jest/recommended",
+    "plugin:jasmine/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true,
+      "modules": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": ["react", "jest", "jasmine"],
+  "rules": {
+    "linebreak-style": ["error", "unix"],
+    "newline-before-return": "error",
+    "newline-after-var": "error",
+    "semi": ["error", "always"],
+    "no-console": "off",
+    "jest/no-disabled-tests": "error",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "error",
+    "jest/valid-expect": "off",
+    "jasmine/new-line-before-expect": "error",
+    "jasmine/no-spec-dupes": ["error", "branch"],
+    "no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+    "jasmine/no-expect-in-setup-teardown": "off"
+  },
+  "settings": {
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "version": "16.4"
+    },
+    "propWrapperFunctions": ["forbidExtraProps"]
+  }
+}

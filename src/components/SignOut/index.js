@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { withFirebase } from "components/Firebase";
 
@@ -9,3 +10,7 @@ const SignOut = ({ firebase }) => (
 );
 
 export default withFirebase(SignOut);
+
+SignOut.propTypes = {
+  firebase: PropTypes.object.isRequired
+};

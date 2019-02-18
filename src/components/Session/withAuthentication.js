@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import AuthenticationContext from "./context";
 import { withFirebase } from "components/Firebase";
@@ -30,6 +31,10 @@ const withAuthentication = Component => {
       );
     }
   }
+
+  WithAuthentication.propTypes = {
+    firebase: PropTypes.object
+  };
 
   return withFirebase(WithAuthentication);
 };

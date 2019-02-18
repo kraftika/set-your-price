@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { withAuthorization } from "components/Session";
 
@@ -61,6 +62,10 @@ class Products extends Component {
   }
 }
 
+Products.propTypes = {
+  firebase: PropTypes.object.isRequired
+};
+
 const ProductItems = ({ products, onDeleteProduct }) => (
   <ul>
     {products.map(product => (
@@ -73,6 +78,11 @@ const ProductItems = ({ products, onDeleteProduct }) => (
     ))}
   </ul>
 );
+
+ProductItems.propTypes = {
+  products: PropTypes.array.isRequired,
+  onDeleteProduct: PropTypes.func.isRequired
+};
 
 const condition = authenticatedUser => !!authenticatedUser;
 

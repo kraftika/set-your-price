@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { compose } from "recompose";
 import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import ROUTES from "constants/routes";
 import { withFirebase } from "components/Firebase";
@@ -12,6 +13,7 @@ const SignIn = () => (
     <PasswordForgetLink />
   </React.Fragment>
 );
+
 class SignInFormBase extends Component {
   initialState = { email: "", password: "", error: null };
 
@@ -67,6 +69,11 @@ class SignInFormBase extends Component {
     );
   }
 }
+
+SignInFormBase.propTypes = {
+  firebase: PropTypes.object,
+  history: PropTypes.object
+};
 
 const SignInForm = compose(
   withFirebase,

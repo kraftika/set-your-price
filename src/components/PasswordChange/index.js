@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import { withFirebase } from "components/Firebase";
 
@@ -52,5 +53,9 @@ class PasswordChange extends Component {
     );
   }
 }
+
+PasswordChange.propTypes = {
+  firebase: PropTypes.object.isRequired
+};
 
 export default withFirebase(PasswordChange);

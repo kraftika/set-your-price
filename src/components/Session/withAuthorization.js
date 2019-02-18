@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
+import PropTypes from "prop-types";
 
 import ROUTES from "constants/routes";
 import { withFirebase } from "components/Firebase";
@@ -32,6 +33,11 @@ const withAuthorization = condition => Component => {
       );
     }
   }
+
+  WithAuthorization.propTypes = {
+    firebase: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  };
 
   return compose(
     withRouter,
