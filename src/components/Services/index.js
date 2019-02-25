@@ -1,6 +1,6 @@
 import ServicesList from "./components/ServicesList";
-import Service from "./components/Service";
+import CreateService from "./components/CreateService";
 
 export default ServicesList;
 
-export { Service };
+export { CreateService };

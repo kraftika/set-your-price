@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { withAuthorization } from "components/Session";
+import ROUTES from "constants/routes";
 
 class Products extends Component {
   state = { currentUser: null, products: [], loading: false };
@@ -10,7 +11,6 @@ class Products extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-
     const currentUser = this.props.firebase.currentUser();
 
     if (currentUser) {
@@ -45,9 +45,9 @@ class Products extends Component {
     const { products, loading } = this.state;
 
     return (
-      <div>
+      <React.Fragment>
         <h1>Products</h1>
-        <Link to={`/products/create`}>Create</Link>
+        <Link to={ROUTES.CREATE_PRODUCT}>Create</Link>
         {products.length ? (
           <ProductItems
             products={products}
@@ -57,7 +57,7 @@ class Products extends Component {
           <div>No product saved</div>
         )}
         {loading && <p>Loading...</p>}
-      </div>
+      </React.Fragment>
     );
   }
 }

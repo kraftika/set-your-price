@@ -1,36 +1,30 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import ROUTES from "constants/routes";
 import { withAuthorization } from "components/Session";
+import ROUTES from "constants/routes";
 
-class ProductForm extends Component {
-  initialState = {
-    name: "",
-    price: 0,
-    error: null
-  };
+class CreateServiceForm extends Component {
+  initialState = { name: "", price: 0, error: null };
 
   state = this.initialState;
 
   onChange = ({ target: { name, value } }) => this.setState({ [name]: value });
 
-  onSubmit = async event => {
+  onSubmit = event => {
     const { name, price } = this.state;
 
     const currentUser = this.props.firebase.currentUser();
 
     if (currentUser) {
       this.props.firebase
-        .products(currentUser.uid)
+        .services(currentUser.uid)
         .push({ name, price })
         .then(() => {
           this.setState({ ...this.initialState });
-          this.props.history.push(ROUTES.PRODUCTS);
+          this.props.history.push(ROUTES.SERVICES);
         })
-        .catch(error => {
-          this.setState({ error });
-        });
+        .error(error => this.setState({ error }));
     }
 
     event.preventDefault();
@@ -38,34 +32,31 @@ class ProductForm extends Component {
 
   render() {
     const { name, price, error } = this.state;
-    const isInvalid = name === "" || price === "" || isNaN(price);
 
     return (
       <React.Fragment>
-        <h1>Product</h1>
+        <h1>Service</h1>
         <form onSubmit={this.onSubmit}>
           <label>
-            name
+            Name
             <input
               name="name"
               value={name}
-              placeholder="Name"
+              type="text"
+              placeholder="Service name..."
               onChange={this.onChange}
             />
           </label>
           <label>
             Price
             <input
-              type="number"
               name="price"
               value={price}
-              placeholder="Price"
+              type="number"
               onChange={this.onChange}
             />
           </label>
-          <button type="submit" disabled={isInvalid}>
-            Save
-          </button>
+          <button type="submit">Save</button>
           {error && <p>{error.message}</p>}
         </form>
       </React.Fragment>
@@ -73,12 +64,11 @@ class ProductForm extends Component {
   }
 }
 
-ProductForm.propTypes = {
+CreateServiceForm.propTypes = {
   firebase: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired
 };
 
 const condition = authenticatedUser => !!authenticatedUser;
 
-export default withAuthorization(condition)(ProductForm);
+export default withAuthorization(condition)(CreateServiceForm);

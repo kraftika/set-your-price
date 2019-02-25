@@ -8,7 +8,7 @@ import Admin from "components/Admin";
 import SignIn from "components/SignIn";
 import SignUp from "components/SignUp";
 import Landing from "components/Landing";
-import ServicesList, { Service } from "components/Services";
+import ServicesList, { CreateService } from "components/Services";
 import ProductsList, { CreateProduct, EditProduct } from "components/Products";
 import PasswordForget from "components/PasswordForget";
 import Account from "components/Account";
@@ -29,7 +29,8 @@ const App = () => (
       <Route exact path={ROUTES.CREATE_PRODUCT} component={CreateProduct} />
       <Route exact path={ROUTES.EDIT_PRODUCT} component={EditProduct} />
       <Route exact path={ROUTES.SERVICES} component={ServicesList} />
-      <Route exact path={ROUTES.SERVICE} component={Service} />
+      <Route exact path={ROUTES.CREATE_SERVICE} component={CreateService} />
+      {/* <Route exact path={ROUTES.EDIT_SERVICE} component={CreateService} /> */}
     </React.Fragment>
   </Router>
 );

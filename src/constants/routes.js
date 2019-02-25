@@ -8,7 +8,8 @@ const ROUTES = {
   EDIT_PRODUCT: "/products/:productId/edit",
   CREATE_PRODUCT: "/products/create",
   SERVICES: "/services",
-  SERVICE: "/service/:id",
+  EDIT_SERVICE: "/services/:serviceId/edit",
+  CREATE_SERVICE: "/services/create",
   PASSWORD_FORGET: "/password-forget",
   ACCOUNT: "/account"
 };
