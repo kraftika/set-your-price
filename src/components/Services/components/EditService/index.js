@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import ROUTES from "constants/routes";
 import { withAuthorization } from "components/Session";
 
-class EditProductForm extends Component {
+class EditServiceForm extends Component {
   initialState = {
     uid: "",
     name: "",
@@ -18,15 +18,15 @@ class EditProductForm extends Component {
   onChange = ({ target: { name, value } }) => this.setState({ [name]: value });
 
   onSubmit = event => {
-    const { uid: productUid, name, price, currentUser } = this.state;
+    const { uid: serviceUID, name, price, currentUser } = this.state;
 
     if (currentUser) {
       this.props.firebase
-        .productRef(currentUser.uid, productUid)
+        .serviceRef(currentUser.uid, serviceUID)
         .set({ name, price })
         .then(() => {
           this.setState({ ...this.initialState });
-          this.props.history.push(ROUTES.PRODUCTS);
+          this.props.history.push(ROUTES.SERVICES);
         })
         .catch(error => this.setState({ error }));
     }
@@ -37,17 +37,17 @@ class EditProductForm extends Component {
   componentDidMount() {
     const {
       match: {
-        params: { productId }
+        params: { serviceId }
       }
     } = this.props;
 
     const currentUser = this.props.firebase.currentUser();
 
-    this.setState({ uid: productId, currentUser });
+    this.setState({ uid: serviceId, currentUser });
 
     if (currentUser) {
       this.props.firebase
-        .productRef(currentUser.uid, productId)
+        .serviceRef(currentUser.uid, serviceId)
         .on("value", snapshot => {
           const { name, price } = snapshot.val();
 
@@ -57,7 +57,7 @@ class EditProductForm extends Component {
   }
 
   componentWillUnmount() {
-    this.props.firebase.productRef().off("value");
+    this.props.firebase.serviceRef().off("value");
   }
 
   render() {
@@ -66,7 +66,7 @@ class EditProductForm extends Component {
 
     return (
       <React.Fragment>
-        <h1>Product</h1>
+        <h1>Service</h1>
         <form onSubmit={this.onSubmit}>
           <label>
             name
@@ -96,7 +96,7 @@ class EditProductForm extends Component {
   }
 }
 
-EditProductForm.propTypes = {
+EditServiceForm.propTypes = {
   firebase: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
@@ -104,4 +104,4 @@ EditProductForm.propTypes = {
 
 const condition = authenticatedUser => !!authenticatedUser;
 
-export default withAuthorization(condition)(EditProductForm);
+export default withAuthorization(condition)(EditServiceForm);

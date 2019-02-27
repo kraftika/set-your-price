@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import ROUTES from "constants/routes";
 import { withAuthorization } from "components/Session";
 
-class ProductForm extends Component {
+class CreateProductForm extends Component {
   initialState = {
     name: "",
     price: 0,
@@ -15,7 +15,7 @@ class ProductForm extends Component {
 
   onChange = ({ target: { name, value } }) => this.setState({ [name]: value });
 
-  onSubmit = async event => {
+  onSubmit = event => {
     const { name, price } = this.state;
 
     const currentUser = this.props.firebase.currentUser();
@@ -45,11 +45,11 @@ class ProductForm extends Component {
         <h1>Product</h1>
         <form onSubmit={this.onSubmit}>
           <label>
-            name
+            Name
             <input
               name="name"
               value={name}
-              placeholder="Name"
+              placeholder="product name..."
               onChange={this.onChange}
             />
           </label>
@@ -73,12 +73,11 @@ class ProductForm extends Component {
   }
 }
 
-ProductForm.propTypes = {
+CreateProductForm.propTypes = {
   firebase: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired
 };
 
 const condition = authenticatedUser => !!authenticatedUser;
 
-export default withAuthorization(condition)(ProductForm);
+export default withAuthorization(condition)(CreateProductForm);

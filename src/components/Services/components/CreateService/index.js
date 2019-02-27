@@ -5,7 +5,11 @@ import { withAuthorization } from "components/Session";
 import ROUTES from "constants/routes";
 
 class CreateServiceForm extends Component {
-  initialState = { name: "", price: 0, error: null };
+  initialState = {
+    name: "",
+    price: 0,
+    error: null
+  };
 
   state = this.initialState;
 
@@ -24,7 +28,9 @@ class CreateServiceForm extends Component {
           this.setState({ ...this.initialState });
           this.props.history.push(ROUTES.SERVICES);
         })
-        .error(error => this.setState({ error }));
+        .catch(error => {
+          this.setState({ error });
+        });
     }
 
     event.preventDefault();
@@ -32,6 +38,7 @@ class CreateServiceForm extends Component {
 
   render() {
     const { name, price, error } = this.state;
+    const isInvalid = name === "" || price === "" || isNaN(price);
 
     return (
       <React.Fragment>
@@ -42,21 +49,23 @@ class CreateServiceForm extends Component {
             <input
               name="name"
               value={name}
-              type="text"
-              placeholder="Service name..."
+              placeholder="service name..."
               onChange={this.onChange}
             />
           </label>
           <label>
             Price
             <input
+              type="number"
               name="price"
               value={price}
-              type="number"
+              placeholder="Price"
               onChange={this.onChange}
             />
           </label>
-          <button type="submit">Save</button>
+          <button type="submit" disabled={isInvalid}>
+            Save
+          </button>
           {error && <p>{error.message}</p>}
         </form>
       </React.Fragment>
